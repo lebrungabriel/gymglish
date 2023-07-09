@@ -25,8 +25,7 @@ const HomeScreen = () => {
       "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
       {
         headers: {
-          authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNWQ5ODM3MGY2MzBiOGRmNmNiMWQxNDA3MTgzNzdkNiIsInN1YiI6IjYzZGEyNTJhODU3MDJlMDU4ZWVjNTI0MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vd-yw4oDsZ9wCD_cia8Z4Tr9Za8zJC8vAPdYODsLlX4",
+          authorization: `${process.env.TMDB_TOKEN}`,
         },
       }
     )
