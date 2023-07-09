@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../components/Card";
 import Header from "../components/Header";
-import { Movie } from "../types/MovieType";
+import Filter from "../components/Filter";
 
 type FetchedMovie = {
   title: string;
@@ -39,6 +39,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
+      <Filter />
       <FlatList
         data={fetchedMovies}
         renderItem={({ item }) => (
