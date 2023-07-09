@@ -1,11 +1,11 @@
-import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { NativeBaseProvider } from "native-base";
+import RootNavigator from "./navigation";
 
 const App: React.FC = () => {
   return (
-    <SafeAreaView>
-      <Text>Welcome Hubert</Text>
-    </SafeAreaView>
+    <NativeBaseProvider>
+      <RootNavigator />
+    </NativeBaseProvider>
   );
 };
 
