@@ -1,22 +1,26 @@
-import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
-import { TouchableOpacity } from "react-native";
-
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Movie } from "../types/MovieType";
 import Entypo from "@expo/vector-icons/Entypo";
 
-type Movie = {
-  title: string;
-  image: string;
-  description: string;
-  rating: number;
-  vote: number;
-  id: number;
-};
+const Card = ({ title, image, description, vote, id, rating }: Movie) => {
+  const navigation = useNavigation();
 
-const Card = ({ title, image }: Movie) => {
   return (
     <View style={styles.card}>
-      <TouchableOpacity style={styles.imageWrapper}>
+      <TouchableOpacity
+        style={styles.imageWrapper}
+        onPress={() =>
+          navigation.navigate("DetailScreen", {
+            title,
+            image,
+            rating,
+            vote,
+            id,
+            description,
+          })
+        }
+      >
         <Image
           source={{ uri: `https://image.tmdb.org/t/p/original/${image}` }}
           style={styles.image}

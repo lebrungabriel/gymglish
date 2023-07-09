@@ -1,23 +1,23 @@
 import { useEffect } from "react";
 import { useState } from "react";
-
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Card from "../components/Card";
 import Header from "../components/Header";
+import { Movie } from "../types/MovieType";
 
-type Movie = {
+type FetchedMovie = {
   title: string;
   poster_path: string;
-  id: number;
-  overview: string;
   vote_average: number;
+  id: number;
   vote_count: number;
+  overview: string;
 };
 
 const HomeScreen = () => {
   // Define state to hold fetched movies
-  const [fetchedMovies, setFetchedMovies] = useState<Movie[]>([]);
+  const [fetchedMovies, setFetchedMovies] = useState<FetchedMovie[]>([]);
 
   useEffect(() => {
     // Fetch movies from API when the component mounts

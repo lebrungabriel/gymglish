@@ -2,9 +2,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import Evilcons from "@expo/vector-icons/EvilIcons";
 import React from "react";
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>MovieApp</Text>
