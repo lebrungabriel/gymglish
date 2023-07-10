@@ -18,6 +18,7 @@ const Header = () => {
 
   const handleSearchMovie = () => {
     setIsLoading(true);
+    // Fetch movie data from the API based on the search text
     fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=en-US&page=1`,
       {
@@ -28,6 +29,7 @@ const Header = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        // Extract relevant movie data from the API response
         const movieData = data.results.map((movie: any) => ({
           title: movie.title,
           overview: movie.overview,
@@ -36,6 +38,7 @@ const Header = () => {
           vote_average: movie.vote_average,
           id: movie.id,
         }));
+        // Update state and dispatch actions to store the movie data
         setIsLoading(false);
         dispatch(removeMoviesToStore());
         dispatch(addResultSearchToStore(searchText));

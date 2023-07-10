@@ -16,6 +16,7 @@ const Card = ({ title, image, description, vote, id, rating }: Movie) => {
   );
 
   useEffect(() => {
+    // Check if the movie is bookmarked by comparing its id with the bookmarked movies' ids
     const isMovieBookmarked = bookmarkSelector.some(
       (bookmark) => bookmark.id === id
     );
@@ -23,10 +24,11 @@ const Card = ({ title, image, description, vote, id, rating }: Movie) => {
   }, [bookmarkSelector, id]);
 
   const handleBookmark = () => {
+    // Toggle the bookmark status of the movie and update the store
     dispatch(
       toggleBookmarkInStore({ title, image, description, vote, id, rating })
     );
-    setIsBookmarked(true);
+    setIsBookmarked(true); // Set the bookmarked state to true
   };
 
   return (

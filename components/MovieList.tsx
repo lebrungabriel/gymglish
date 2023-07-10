@@ -2,16 +2,7 @@ import { View } from "native-base";
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Card from "../components/Card";
-// import { FetchedMovie } from "../types/FetchedMovie";
-
-type FetchedMovie = {
-  title: string;
-  poster_path: string;
-  vote_average: number;
-  id: number;
-  vote_count: number;
-  overview: string;
-};
+import { FetchedMovie } from "../types/FetchedMovieType";
 
 type MovieListProps = {
   data: FetchedMovie[];
@@ -19,9 +10,11 @@ type MovieListProps = {
 
 const MovieList: React.FC<MovieListProps> = ({ data }) => (
   <View style={styles.container}>
+    {/* FlatList component to render the movie list */}
     <FlatList
       data={data}
       renderItem={({ item }) => (
+        // Render a Card component for each movie item
         <Card
           title={item.title}
           image={item.poster_path}

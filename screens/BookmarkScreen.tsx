@@ -13,18 +13,23 @@ const BookmarkScreen = () => {
   );
 
   return (
+    // SafeAreaView to handle safe area insets
     <SafeAreaView style={styles.container}>
       <View style={{ backgroundColor: "white", height: "100%" }}>
+        {/* Gradient header */}
         <LinearGradient colors={["#EFA9C4", "white"]}>
           <View style={styles.header}>
             <Text style={styles.title}>My favourites</Text>
           </View>
         </LinearGradient>
+
+        {/* Check if there are no bookmarks */}
         {bookmarkSelector.length === 0 ? (
           <Text style={{ textAlign: "center", marginTop: 100 }}>
             You currently have no films in your favourites...
           </Text>
         ) : (
+          // Display the bookmarks in a FlatList
           <FlatList
             data={bookmarkSelector}
             renderItem={({ item }) => (
@@ -59,8 +64,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EFA9C4",
     position: "relative",
-    // minHeight: "100%",
-    // marginBottom: 100,
   },
   header: {
     height: 100,

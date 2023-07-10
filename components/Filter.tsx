@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, View } from "react-native";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { setFilterInStore } from "../reducers/filter";
@@ -13,9 +12,12 @@ type Props = {};
 const Filter = (props: Props) => {
   const dispatch = useDispatch();
 
+  // Handler for filtering movies based on the selected filter
   const handleFilter = (textFilter: string) => {
+    // Clear the current movie list and search results
     dispatch(removeMoviesToStore());
     dispatch(removeResultSearchToStore());
+    // Set the selected filter in the store
     dispatch(setFilterInStore(textFilter));
   };
   return (

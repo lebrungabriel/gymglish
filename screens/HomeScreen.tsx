@@ -74,6 +74,7 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
+    // Trigger fetchMovies when filterSelector changes
     fetchMovies(filterSelector);
   }, [filterSelector]);
 
@@ -84,6 +85,8 @@ const HomeScreen = () => {
           <Header />
         </LinearGradient>
         <Filter />
+
+        {/* Display search result information */}
         {searchResult.length > 1 && (
           <Text
             style={{
@@ -96,7 +99,11 @@ const HomeScreen = () => {
             Résultats pour : {searchResult} ({movieSelector.length})
           </Text>
         )}
+
+        {/* Display loading skeleton when data is loading */}
         {isLoading && <LoadingSkeleton />}
+
+        {/* Display movie list */}
         {movieSelector.length > 0 ? (
           <MovieList data={movieSelector} />
         ) : (
