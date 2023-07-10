@@ -19,14 +19,14 @@ const BookmarkScreen = () => {
         {/* Gradient header */}
         <LinearGradient colors={["#EFA9C4", "white"]}>
           <View style={styles.header}>
-            <Text style={styles.title}>My favourites</Text>
+            <Text style={styles.title}>My favorites</Text>
           </View>
         </LinearGradient>
 
         {/* Check if there are no bookmarks */}
         {bookmarkSelector.length === 0 ? (
           <Text style={{ textAlign: "center", marginTop: 100 }}>
-            You currently have no films in your favourites...
+            You currently have no films in your favorites...
           </Text>
         ) : (
           // Display the bookmarks in a FlatList
@@ -45,7 +45,7 @@ const BookmarkScreen = () => {
             horizontal={false}
             contentContainerStyle={{
               paddingTop: 40,
-              //   paddingBottom: 100,
+              height: "100%",
               gap: 20,
             }}
             showsHorizontalScrollIndicator={false}

@@ -110,7 +110,7 @@ const DetailScreen = ({ route }: Props) => {
         </View>
 
         {/* Movie description */}
-        <View style={{ height: "60%" }}>
+        <View style={{ height: "60%", paddingHorizontal: 20 }}>
           <ScrollView>
             <Text style={styles.description}>{description}</Text>
           </ScrollView>
@@ -179,10 +179,5 @@ const styles = StyleSheet.create({
   starIcon: {
     fontSize: 20,
     marginRight: 2,
-  },
-  descriptionContainer: {
-    marginHorizontal: 10,
-    width: "100%",
-    paddingHorizontal: 20,
   },
 });
