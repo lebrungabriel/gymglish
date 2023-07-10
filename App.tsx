@@ -5,9 +5,10 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import filter from "./reducers/filter";
 import movie from "./reducers/movie";
+import bookmark from "./reducers/bookmark";
 
 const store = configureStore({
-  reducer: { filter, movie },
+  reducer: { filter, movie, bookmark },
 });
 
 const App: React.FC = () => {

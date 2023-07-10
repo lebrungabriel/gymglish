@@ -1,10 +1,33 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Movie } from "../types/MovieType";
 import Entypo from "@expo/vector-icons/Entypo";
+import { useDispatch, useSelector } from "react-redux";
+import { BookmarkState, toggleBookmarkInStore } from "../reducers/bookmark";
 
 const Card = ({ title, image, description, vote, id, rating }: Movie) => {
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const bookmarkSelector = useSelector(
+    (state: { bookmark: BookmarkState }) => state.bookmark.value.bookmarks
+  );
+
+  useEffect(() => {
+    const isMovieBookmarked = bookmarkSelector.some(
+      (bookmark) => bookmark.id === id
+    );
+    setIsBookmarked(isMovieBookmarked);
+  }, [bookmarkSelector, id]);
+
+  const handleBookmark = () => {
+    dispatch(
+      toggleBookmarkInStore({ title, image, description, vote, id, rating })
+    );
+    setIsBookmarked(true);
+  };
 
   return (
     <View style={styles.card}>
@@ -31,8 +54,11 @@ const Card = ({ title, image, description, vote, id, rating }: Movie) => {
           {/* Limit the title length and add ellipsis if it exceeds 30 characters */}
           {title.length > 30 ? `${title.slice(0, 30)}...` : title}
         </Text>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Entypo name="heart" style={styles.icon} />
+        <TouchableOpacity style={styles.iconWrapper} onPress={handleBookmark}>
+          <Entypo
+            name="heart"
+            style={[styles.icon, isBookmarked && styles.bookmarkedIcon]}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -92,5 +118,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
     elevation: 1,
+  },
+  bookmarkedIcon: {
+    color: "#5C59F4",
   },
 });

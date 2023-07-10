@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Card from "../components/Card";
+// import Card from "../components/Card";
 import Header from "../components/Header";
 import Filter from "../components/Filter";
+import MovieList from "../components/MovieList";
 import { useSelector } from "react-redux";
 import { FilterState } from "../reducers/filter";
 import { MovieState } from "../reducers/movie";
@@ -85,50 +86,9 @@ const HomeScreen = () => {
         </Text>
       )}
       {movieSelector.length > 0 ? (
-        <FlatList
-          data={movieSelector}
-          renderItem={({ item }) => (
-            <Card
-              title={item.title}
-              image={item.poster_path}
-              rating={item.vote_average}
-              vote={item.vote_count}
-              description={item.overview}
-              id={item.id}
-            />
-          )}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingTop: 20,
-            paddingBottom: 70,
-            gap: 20,
-          }}
-          columnWrapperStyle={styles.columnWrapper}
-          horizontal={false}
-          numColumns={2}
-        />
+        <MovieList data={movieSelector} />
       ) : (
-        <FlatList
-          data={fetchedMovies}
-          renderItem={({ item }) => (
-            <Card
-              title={item.title}
-              image={item.poster_path}
-              rating={item.vote_average}
-              vote={item.vote_count}
-              description={item.overview}
-              id={item.id}
-            />
-          )}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingVertical: 20,
-            gap: 20,
-          }}
-          columnWrapperStyle={styles.columnWrapper}
-          horizontal={false}
-          numColumns={2}
-        />
+        <MovieList data={fetchedMovies} />
       )}
     </SafeAreaView>
   );
@@ -138,6 +98,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "white",
     position: "relative",
     marginBottom: 180,

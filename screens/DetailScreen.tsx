@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Image,
@@ -7,14 +8,16 @@ import {
   View,
 } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import { Movie } from "../types/MovieType";
 import Entypo from "@expo/vector-icons/Entypo";
+import { BookmarkState, toggleBookmarkInStore } from "../reducers/bookmark";
 
 type Props = {
   route: RouteProp<{ DetailScreen: Movie }, "DetailScreen">;
 };
 
-// function used to render star icons according to the average vote for the film
+// Function used to render star icons according to the average vote for the film
 const renderStars = (rating?: number) => {
   const MAX_STARS = 5;
   const STAR_INCREMENT = 0.5;
@@ -44,20 +47,48 @@ const renderStars = (rating?: number) => {
 };
 
 const DetailScreen = ({ route }: Props) => {
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
   const { title, image, rating, vote, description, id } = route.params;
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const bookmarkSelector = useSelector(
+    (state: { bookmark: BookmarkState }) => state.bookmark.value.bookmarks
+  );
+
+  useEffect(() => {
+    // Check if the movie is bookmarked
+    const bookmarkedMovie = bookmarkSelector.find((movie) => movie.id === id);
+    setIsBookmarked(!!bookmarkedMovie);
+  }, [bookmarkSelector, id]);
+
+  const handleBookmark = () => {
+    dispatch(
+      toggleBookmarkInStore({ title, image, description, vote, id, rating })
+    );
+    setIsBookmarked(true);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageWrapper}>
+        {/* Movie image */}
         <Image
           source={{ uri: `https://image.tmdb.org/t/p/original/${image}` }}
           style={styles.image}
         />
-        <TouchableOpacity style={{ ...styles.iconWrapper, top: 20, right: 20 }}>
-          <Entypo name="heart" style={{ fontSize: 25 }} />
+        {/* Bookmark icon */}
+        <TouchableOpacity
+          style={{ ...styles.iconWrapper, top: 20, right: 20 }}
+          onPress={handleBookmark}
+        >
+          <Entypo
+            name="heart"
+            style={{ fontSize: 25, color: isBookmarked ? "#5C59F4" : "#333" }}
+          />
         </TouchableOpacity>
+        {/* Back button */}
         <TouchableOpacity
           style={{ ...styles.iconWrapper, top: 20, left: 20 }}
           onPress={() => navigation.goBack()}
@@ -66,18 +97,17 @@ const DetailScreen = ({ route }: Props) => {
         </TouchableOpacity>
       </View>
       <View style={styles.infoWrapper}>
-        <View
-          style={{
-            width: "100%",
-            alignItems: "center",
-          }}
-        >
+        <View style={{ width: "100%", alignItems: "center" }}>
+          {/* Movie title */}
           <Text style={styles.title}>{title}</Text>
           <View style={styles.ratingWrapper}>
+            {/* Render star icons for rating */}
             {rating ? renderStars(rating) : <Text>No rating...</Text>}
+            {/* Display vote count */}
             {vote ? <Text>({vote})</Text> : <Text>(No vote...)</Text>}
           </View>
         </View>
+        {/* Movie description */}
         <Text style={styles.description}>{description}</Text>
       </View>
     </SafeAreaView>
@@ -120,7 +150,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-  title: { fontSize: 20, marginBottom: 10, textAlign: "center" },
+  title: {
+    fontSize: 20,
+    marginBottom: 10,
+    textAlign: "center",
+  },
   ratingWrapper: {
     flexDirection: "row",
     alignItems: "center",
