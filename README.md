@@ -22,6 +22,12 @@ MovieApp is a mobile application built with React Native and Expo that allows us
    - Copy the generated API token.
 6. Create a .env file in the project root directory and add your TMDB API token: TMDB_TOKEN=your-tmdb-api-token
 7. Launch the app: yarn start or expo start
+   - This will start the Expo development server.
+   - Make sure you have the Expo Go app installed on your smartphone.
+8. Scan the QR code:
+   - Open the Expo Go app on your smartphone.
+   - Scan the QR code displayed in the terminal or Expo DevTools.
+   - The app will load and run on your smartphone.
 
 ## Configuration
 
