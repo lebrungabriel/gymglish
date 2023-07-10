@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Filter from "../components/Filter";
 import { useSelector } from "react-redux";
 import { FilterState } from "../reducers/filter";
+import { MovieState } from "../reducers/movie";
 
 type FetchedMovie = {
   title: string;
@@ -23,6 +24,14 @@ const HomeScreen = () => {
 
   const filterSelector = useSelector(
     (state: { filter: FilterState }) => state.filter.value.filter
+  );
+
+  const movieSelector = useSelector(
+    (state: { movie: MovieState }) => state.movie.value.movies
+  );
+
+  const searchResult = useSelector(
+    (state: { movie: MovieState }) => state.movie.value.resultInput
   );
 
   const fetchMovies = (filter: string) => {
@@ -63,27 +72,64 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <Header />
       <Filter />
-      <FlatList
-        data={fetchedMovies}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            image={item.poster_path}
-            rating={item.vote_average}
-            vote={item.vote_count}
-            description={item.overview}
-            id={item.id}
-          />
-        )}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingVertical: 20,
-          gap: 20,
-        }}
-        columnWrapperStyle={styles.columnWrapper}
-        horizontal={false}
-        numColumns={2}
-      />
+      {searchResult.length > 1 && (
+        <Text
+          style={{
+            marginLeft: 20,
+            marginVertical: 10,
+            color: "#495057",
+            fontWeight: "600",
+          }}
+        >
+          Résultats pour : {searchResult} ({movieSelector.length})
+        </Text>
+      )}
+      {movieSelector.length > 0 ? (
+        <FlatList
+          data={movieSelector}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              image={item.poster_path}
+              rating={item.vote_average}
+              vote={item.vote_count}
+              description={item.overview}
+              id={item.id}
+            />
+          )}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingTop: 20,
+            paddingBottom: 70,
+            gap: 20,
+          }}
+          columnWrapperStyle={styles.columnWrapper}
+          horizontal={false}
+          numColumns={2}
+        />
+      ) : (
+        <FlatList
+          data={fetchedMovies}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              image={item.poster_path}
+              rating={item.vote_average}
+              vote={item.vote_count}
+              description={item.overview}
+              id={item.id}
+            />
+          )}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingVertical: 20,
+            gap: 20,
+          }}
+          columnWrapperStyle={styles.columnWrapper}
+          horizontal={false}
+          numColumns={2}
+        />
+      )}
     </SafeAreaView>
   );
 };

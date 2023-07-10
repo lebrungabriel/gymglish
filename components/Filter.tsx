@@ -3,6 +3,10 @@ import React from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { setFilterInStore } from "../reducers/filter";
+import {
+  removeMoviesToStore,
+  removeResultSearchToStore,
+} from "../reducers/movie";
 
 type Props = {};
 
@@ -10,6 +14,8 @@ const Filter = (props: Props) => {
   const dispatch = useDispatch();
 
   const handleFilter = (textFilter: string) => {
+    dispatch(removeMoviesToStore());
+    dispatch(removeResultSearchToStore());
     dispatch(setFilterInStore(textFilter));
   };
   return (
