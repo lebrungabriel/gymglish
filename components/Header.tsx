@@ -8,18 +8,21 @@ import {
   removeMoviesToStore,
 } from "../reducers/movie";
 
+import { TMDB_TOKEN } from "@env";
+
 const Header = () => {
   const [searchText, setSearchText] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const handleSearchMovie = () => {
+    setIsLoading(true);
     fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${searchText.trim()}&include_adult=false&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=en-US&page=1`,
       {
         headers: {
-          authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOWE5ODE1NGFkZDY3OTZlNTA5NmJkNzZlZjRkZmY0NyIsInN1YiI6IjY0YWIyOTcwNjZhMGQzMDBhZGU4ODI4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TqspPd6-Yt6K7KyO1bpqDo2Ax9YNdtvN8ftReHWQ7wE",
+          authorization: `Bearer ${TMDB_TOKEN}`,
         },
       }
     )
@@ -33,6 +36,7 @@ const Header = () => {
           vote_average: movie.vote_average,
           id: movie.id,
         }));
+        setIsLoading(false);
         dispatch(removeMoviesToStore());
         dispatch(addResultSearchToStore(searchText));
         dispatch(addMovieToStore(movieData));
@@ -61,7 +65,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     height: 130,
     alignItems: "center",
     justifyContent: "space-evenly",

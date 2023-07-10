@@ -40,6 +40,7 @@ export default Filter;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",

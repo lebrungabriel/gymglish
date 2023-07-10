@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     width: 100,
+    borderRadius: 8,
   },
   text: {
     color: "#6E6E73",
   },
   activeButton: {
     backgroundColor: "#5C59F4",
-    borderRadius: 8,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
