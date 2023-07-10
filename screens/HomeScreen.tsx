@@ -8,7 +8,7 @@ import Filter from "../components/Filter";
 import MovieList from "../components/MovieList";
 import { useSelector } from "react-redux";
 import { FilterState } from "../reducers/filter";
-import { MovieState } from "../reducers/movie";
+import movie, { MovieState } from "../reducers/movie";
 
 import { TMDB_TOKEN } from "@env";
 
@@ -93,10 +93,9 @@ const HomeScreen = () => {
               marginLeft: 20,
               marginVertical: 10,
               color: "#495057",
-              fontWeight: "600",
             }}
           >
-            Résultats pour : {searchResult} ({movieSelector.length})
+            {movieSelector.length} Résultats pour : {searchResult}
           </Text>
         )}
 

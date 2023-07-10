@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -107,8 +108,13 @@ const DetailScreen = ({ route }: Props) => {
             {vote ? <Text>({vote})</Text> : <Text>(No vote...)</Text>}
           </View>
         </View>
+
         {/* Movie description */}
-        <Text style={styles.description}>{description}</Text>
+        <View style={{ height: "60%" }}>
+          <ScrollView>
+            <Text style={styles.description}>{description}</Text>
+          </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -149,6 +155,7 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: "center",
     justifyContent: "space-evenly",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 20,
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 15,
     textAlign: "center",
-    width: "90%",
+    width: "100%",
     lineHeight: 23,
   },
   starWrapper: {
@@ -172,5 +179,10 @@ const styles = StyleSheet.create({
   starIcon: {
     fontSize: 20,
     marginRight: 2,
+  },
+  descriptionContainer: {
+    marginHorizontal: 10,
+    width: "100%",
+    paddingHorizontal: 20,
   },
 });

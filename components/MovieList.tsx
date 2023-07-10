@@ -26,7 +26,8 @@ const MovieList: React.FC<MovieListProps> = ({ data }) => (
       )}
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
-        paddingVertical: 20,
+        paddingTop: 30,
+        paddingBottom: 300,
         gap: 20,
       }}
       columnWrapperStyle={styles.columnWrapper}
