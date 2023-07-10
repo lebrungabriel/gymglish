@@ -12,7 +12,7 @@ MovieApp is a mobile application built with React Native and Expo that allows us
 ## Installation
 
 1. Make sure you have [Node.js](https://nodejs.org) installed.
-2. Clone this repository: git clone https://github.com/your-username/MovieApp.git
+2. Clone this repository: git clone https://github.com/lebrungabriel/gymglish.git
 3. cd MovieApp
 4. install dependencies: npm install or yarn install
 5. Obtain a TMDB API token:
@@ -27,28 +27,19 @@ MovieApp is a mobile application built with React Native and Expo that allows us
 
 The project structure follows the standard structure for React Native applications:
 
-├── assets
-│ ├── fonts
-│ ├── images
-├── components
-├── reducers
-├── screens
-├── types
-└── App.tsx
-
-assets: Contains fonts and images used in the app.
-components: Contains reusable components used throughout the app.
-reducers: Contains Redux reducers for managing app state.
-screens: Contains screen components for different app screens.
-types: Contains type definitions used in the app.
-App.tsx: Entry point of the app.
+- assets: Contains fonts and images used in the app.
+- components: Contains reusable components used throughout the app.
+- reducers: Contains Redux reducers for managing app state.
+- screens: Contains screen components for different app screens.
+- types: Contains type definitions used in the app.
+- App.tsx: Entry point of the app.
 
 ## Technologies Used
 
-ReactNative
-Expo
-Redux
-ReactNavigation
+- ReactNative
+- Expo
+- Redux
+- ReactNavigation
 
 ## License
 
@@ -56,6 +47,6 @@ This project is licensed under the MIT License.
 
 ## Acknowledgements
 
-TheMovieDataBase API
-React Native Safe Area Context
-NativeBase
+- TheMovieDataBase API
+- React Native Safe Area Context
+- NativeBase
