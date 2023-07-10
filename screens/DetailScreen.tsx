@@ -4,7 +4,6 @@ import {
   Image,
   SafeAreaView,
   Text,
-  StatusBar,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -73,7 +72,6 @@ const DetailScreen = ({ route }: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden={true} />
       <View style={styles.imageWrapper}>
         {/* Movie image */}
         <Image
