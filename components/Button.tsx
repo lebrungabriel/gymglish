@@ -1,14 +1,37 @@
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import { useSelector } from "react-redux";
+import { FilterState } from "../reducers/filter";
 
 type Button = {
   buttonText: string;
+  handleFilter: () => void;
 };
 
-const Button = ({ buttonText }: Button) => {
+const Button = ({ buttonText, handleFilter }: Button) => {
+  const filterSelector = useSelector(
+    (state: { filter: FilterState }) => state.filter.value.filter
+  );
+
+  // Update the component when filterSelector changes
+  useEffect(() => {}, [filterSelector]);
+
   return (
-    <TouchableOpacity style={styles.button}>
-      <Text style={styles.text}>{buttonText}</Text>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        buttonText === filterSelector && styles.activeButton,
+      ]}
+      onPress={handleFilter}
+    >
+      <Text
+        style={[
+          styles.text,
+          buttonText === filterSelector && { color: "white" },
+        ]}
+      >
+        {buttonText}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -25,5 +48,17 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#6E6E73",
+  },
+  activeButton: {
+    backgroundColor: "#5C59F4",
+    borderRadius: 8,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 4.59,
+    elevation: 5,
   },
 });
